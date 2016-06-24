@@ -289,15 +289,21 @@ var utils = {
 * 判断值的类型,调用方法为utils.isArray
 *
 * */
-var types= ["Array", "Boolean", "Date", "Number", "Object", "RegExp", "String", "Window", "HTMLDocument"];
 
-for(var i = 0,cur;cur=types[i++];){
-    utils["is"+cur]=(function(type){
-        return function (obj) {
-            return Object.prototype.toString.call(obj) == "[object " + type + "]";
-        }
-    })(cur);
-};
+
+~function(){
+    var types = ["Array", "Boolean", "Date", "Number", "Object", "RegExp", "String", "Window", "HTMLDocument"];
+
+    for (var i = 0, cur; cur = types[i++];) {
+        utils["is" + cur] = (function (type) {
+            return function (obj) {
+                return Object.prototype.toString.call(obj) == "[object " + type + "]";
+            }
+        })(cur);
+    }
+    ;
+}();
+
 
 
 
