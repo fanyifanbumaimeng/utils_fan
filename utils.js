@@ -281,6 +281,19 @@ var utils = {
             }
         };
     },
+    cloneObject ：function(obj){
+	if(!obj||Object.prototype.toString.call(obj)!=="[object Object]"){
+		return obj;
+	}
+	var c = Object.prototype.toString.call(obj)==="[object Array]"?[]:{};
+	for(var key in obj){
+		if(obj.hasOwnProperty(key)){
+			c[key] = Object.prototype.toString.call(obj[key]) === "[object Object]" ? cloneObject(obj[key]) : obj[key];
+		}
+	}
+	return c;
+    },
+    
 };
 
 
