@@ -16,6 +16,16 @@ var utils = {
         }
         return ary;
     },
+    unique：function(arr) {
+    var result = [], hash = {};
+    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+        if (!hash[elem]) {
+            result.push(elem);
+            hash[elem] = true;
+        }
+    }
+    return result;
+    },
     //toJSON:将字符串转换为JSON格式的对象
     toJSON: function toJSON(str) {
         return "JSON" in window ? JSON.parse(str) : eval("(" + str + ")");
