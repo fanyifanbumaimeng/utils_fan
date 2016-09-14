@@ -291,6 +291,7 @@ var utils = {
             }
         };
     },
+    
     cloneObject ：function(obj){
 	if(!obj||Object.prototype.toString.call(obj)!=="[object Object]"){
 		return obj;
@@ -303,21 +304,16 @@ var utils = {
 	}
 	return c;
     },
-    convertImgToBase64：function(url, callback, outputFormat){
-    var canvas = document.createElement('CANVAS'),
-        ctx = canvas.getContext('2d'),
-        img = new Image;
-    img.crossOrigin = 'Anonymous';
-    img.onload = function(){
-        canvas.height = img.height;
-        canvas.width = img.width;
-        ctx.drawImage(img,0,0);
-        var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-        callback.call(this, dataURL);
-        canvas = null; 
-    };
-    img.src = url;
-}，
+    /*获取元素的outerHTML*/
+    getOuterHTML : function(el) {
+  if (el.outerHTML) {
+    return el.outerHTML
+  } else {
+    var container = document.createElement('div')
+    container.appendChild(el.cloneNode(true))
+    return container.innerHTML
+  }
+},
 };
 
 
