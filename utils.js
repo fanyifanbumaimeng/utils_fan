@@ -314,15 +314,33 @@ var utils = {
 			return container.innerHTML
 		}
 	},
+	//利用浏览器的特性来解析url
 	urlParsing:function(url){
-		var str = url.split('?')[1];
-		var result = {};
-		var temp = str.split('&');
-		for (var i = 0; i < temp.length; i++) {
-			var temp2 = temp[i].split('=');
-			result[temp2[0]] = temp2[1];
-		}
-		return result;
+        var a =  document.createElement('a');
+        a.href = url;
+        return {
+            source: url,
+            protocol: a.protocol.replace(':',''),
+            host: a.hostname,
+            port: a.port,
+            query: a.search,
+            params: (function(){
+                var ret = {},
+                    seg = a.search.replace(/^\?/,'').split('&'),
+                    len = seg.length, i = 0, s;
+                for (;i<len;i++) {
+                    if (!seg[i]) { continue; }
+                    s = seg[i].split('=');
+                    ret[s[0]] = s[1];
+                }
+                return ret;
+            })(),
+            file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1],
+            hash: a.hash.replace('#',''),
+            path: a.pathname.replace(/^([^\/])/,'/$1'),
+            relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],
+            segments: a.pathname.replace(/^\//,'').split('/')
+        };
 	},
 };
 
