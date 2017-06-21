@@ -10,3 +10,7 @@ utils.isNumber(3);//true
 utils.isBoolean(1>5);//true
 utils.isObject(utils.addClass);//false
 ```
+
+#2017/6/21更新
+
+- 改进了parsingUrl方法
