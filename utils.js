@@ -363,6 +363,16 @@ var utils = {
 	}
 	;
 }();
+// 元转分
+function centFormat(price) {
+  if (typeof (price) === 'string' && price !== '') {
+    return parseFloat((parseFloat(price) * 100).toFixed());
+  }
+  if (typeof (price) === 'number' && !Number.isNaN(price)) {
+    return (parseFloat((price * 100).toFixed()));
+  }
+  return price;
+}
 
 
 
